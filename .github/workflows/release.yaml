@@ -1,34 +1,22 @@
-#code from https://semantic-release.gitbook.io/semantic-release/recipes/ci-configurations/github-actions
-
 name: Release
 on:
   push:
     branches:
-      - main # or main
-
-permissions:
-  contents: read # for checkout
+      - main
 
 jobs:
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    permissions:
-        contents: write # to be able to publish a GitHub release
-        issues: write # to be able to comment on released issues
-        pull-requests: write # to be able to comment on released pull requests
-    steps:
-      - name: Checkout
-        uses: actions/checkout@6d193bf28034eafb982f37bd894289fe649468fc #v4.1.7
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@97ca147735c170fb35096b39ef17a0fc5d9270ac #v4.0.3
-        with:
-          node-version: "20.8.1"
-      - name: Install dependencies
-        run: npm clean-install
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+    release:
+        permissions:
+            contents: write
+            issues: write
+            pull-requests: write
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
+            - name: Set up Node.js
+              uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+              with:
+               node-version: '20.8.1'
+            - run: npx semantic-release
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
