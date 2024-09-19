@@ -48,3 +48,5 @@ jobs:
                 push: true
                 outputs: type=image,name=swimgenerator,annotation-index.org.opencontainers.image.description=Swim Generator multi-arch image
                 
+
+                
