@@ -1,13 +1,14 @@
 import Fluent
-import Foundation
-import Vapor
+import struct Foundation.UUID
 
-final class Workout: Model, Content, @unchecked Sendable {
-
-    static let schema = "workouts" //table name
-
+/// Property wrappers interact poorly with `Sendable` checking, causing a warning for the `@ID` property
+/// It is recommended you write your model with sendability checking on and then suppress the warning
+/// afterwards with `@unchecked Sendable`.
+final class Workout: Model, @unchecked Sendable {
+    static let schema = "workouts"
+    
     @ID(key: .id)
-    var id: UUID? // primary key
+    var id: UUID?
 
     @Field(key: "title")
     var title: String
@@ -25,5 +26,4 @@ final class Workout: Model, Content, @unchecked Sendable {
             title: self.$title.value
         )
     }
-
 }

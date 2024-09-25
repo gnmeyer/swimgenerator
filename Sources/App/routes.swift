@@ -11,7 +11,8 @@ func routes(_ app: Application) throws {
     }
 
      try app.register(collection: TodoController())
-    
+     try app.register(collection: WorkoutController())
+
 
 //    app.post("workouts") {req -> EventLoopFuture<Workout> in
 //       let workout = try req.content.decode(Workout.self)

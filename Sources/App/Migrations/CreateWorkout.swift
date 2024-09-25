@@ -1,18 +1,14 @@
 import Fluent
-import Foundation
-import FluentPostgresDriver
 
-struct CreateWorkout: Migration {
-
-    func prepare(on database: Database) -> EventLoopFuture<Void> {
-            database.schema("workouts")
+struct CreateWorkout: AsyncMigration {
+    func prepare(on database: Database) async throws {
+        try await database.schema("workouts")
             .id()
-            .field("title", .string)
+            .field("title", .string, .required)
             .create()
-        }
-        
-        // undo
-        func revert(on database: Database) -> EventLoopFuture<Void> {
-            database.schema("workouts").delete()
-        }
+    }
+
+    func revert(on database: Database) async throws {
+        try await database.schema("workouts").delete()
+    }
 }
