@@ -10,5 +10,22 @@ func routes(_ app: Application) throws {
         "Hello, world!"
     }
 
-    try app.register(collection: TodoController())
+     try app.register(collection: TodoController())
+    
+
+//    app.post("workouts") {req -> EventLoopFuture<Workout> in
+//       let workout = try req.content.decode(Workout.self)
+//        
+//        return workout.create(on: req.db)
+//    }
+    
+//    //localhost:8080/workout POST
+//   app.post("workouts") {req -> EventLoopFuture<Workout> in
+//       let workout = try req.content.decode(Workout.self)
+//       
+//       return workout.create(on: req.db).map { workout }
+//   }
+    
+
+
 }
