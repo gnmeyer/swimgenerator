@@ -20,8 +20,11 @@ public func configure(_ app: Application) async throws {
 
 //    app.database.use(.postgres(hostname: "localhost", username: "postgres", password: "", database: "swimgenerator"), as: .psql)
 
-    app.migrations.add(CreateTodo())
-    app.migrations.add(CreateWorkout())
+//    app.migrations.add(CreateTodo())
+    // app.migrations.add(CreateSet())
+    
+    // app.migrations.add(CreateWorkout())
+    app.migrations.add(CreateStroke())
 
     app.views.use(.leaf)
 

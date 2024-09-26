@@ -1,5 +1,6 @@
 import Fluent
 import struct Foundation.UUID
+// import Set
 
 /// Property wrappers interact poorly with `Sendable` checking, causing a warning for the `@ID` property
 /// It is recommended you write your model with sendability checking on and then suppress the warning
@@ -12,18 +13,29 @@ final class Workout: Model, @unchecked Sendable {
 
     @Field(key: "title")
     var title: String
+    
+    @Field(key: "distance")
+    var distance: Int
+
+    @Children(for: \.$workout)
+    var sets: [Set]
+
 
     init() { }
 
-    init(id: UUID? = nil, title: String) {
+    init(id: UUID? = nil, title: String, distance: Int = 0, sets: [Set] = []) {
         self.id = id
         self.title = title
+        self.distance = 0
+        self.sets = []
     }
     
     func toDTO() -> WorkoutDTO {
         .init(
             id: self.id,
-            title: self.$title.value
+            title: self.$title.value,
+            distance: self.$distance.values,
+            sets: 
         )
     }
 }

@@ -1,16 +1,23 @@
+//
+//  CreateStroke.swift
+//  Workout
+//
+//  Created by Grant Meyer on 9/26/24.
+//
+
 import Fluent
 
-struct CreateWorkout: AsyncMigration {
+struct CreateStroke: AsyncMigration {
     func prepare(on database: Database) async throws {
-        try await database.schema("workouts")
+        try await database.schema("strokes")
             .id()
             .field("title", .string, .required)
             .field("distance", .int, .required)
-            .field("sets", .array(of: .json), .required)
+            .field("rest", .int, .required)
             .create()
     }
 
     func revert(on database: Database) async throws {
-        try await database.schema("workouts").delete()
+        try await database.schema("strokes").delete()
     }
 }
