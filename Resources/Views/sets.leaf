@@ -1,0 +1,41 @@
+# Import the necessary libraries
+import Leaf
+
+# Define the model
+struct WorkoutSet: Codable {
+    var name: String
+    var repetitions: Int
+    var weight: Double
+}
+
+# Define the view
+struct WorkoutSetView: View {
+    @State private var name: String = ""
+    @State private var repetitions: Int = 0
+    @State private var weight: Double = 0.0
+
+    var body: some View {
+        VStack {
+            TextField("Name", text: $name)
+                .padding()
+                .border(Color.gray, width: 1)
+            
+            TextField("Repetitions", value: $repetitions, formatter: NumberFormatter())
+                .padding()
+                .border(Color.gray, width: 1)
+            
+            TextField("Weight", value: $weight, formatter: NumberFormatter())
+                .padding()
+                .border(Color.gray, width: 1)
+            
+            Button(action: {
+                let workoutSet = WorkoutSet(name: name, repetitions: repetitions, weight: weight)
+                // Handle the created model (e.g., save it to a database)
+            }) {
+                Text("Create Workout Set")
+            }
+            .padding()
+        }
+        .padding()
+    }
+}
