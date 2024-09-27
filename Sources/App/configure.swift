@@ -24,7 +24,7 @@ public func configure(_ app: Application) async throws {
     // app.migrations.add(CreateSet())
     
     app.migrations.add(CreateWorkout())
-    app.migrations.add(CreateSet())
+    app.migrations.add(CreateSwimSet())
     app.migrations.add(CreateStroke())
 
     app.views.use(.leaf)

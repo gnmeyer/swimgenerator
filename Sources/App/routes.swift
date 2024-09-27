@@ -11,7 +11,9 @@ func routes(_ app: Application) throws {
     }
 
 
-     try app.register(collection: WorkoutController())
+    try app.register(collection: WorkoutController())
+    try app.register(collection: SwimSetController())
+    try app.register(collection: StrokeController())
 
 
 //    app.post("workouts") {req -> EventLoopFuture<Workout> in
