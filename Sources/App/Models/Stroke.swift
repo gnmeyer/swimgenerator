@@ -23,17 +23,18 @@ final class Stroke: Model, @unchecked Sendable {
     @Field(key: "rest")
     var rest: Int
 
-    @OptionalParent(key: "set_id")
-    var set: Set?
+    // @OptionalParent(key: "set_id")
+    // var set: Set?
 
     init() { }
 
-    init(id: UUID? = nil, title: String, distance: Int, rest: Int, set_id: UUID) {
+    // init(id: UUID? = nil, title: String, distance: Int, rest: Int, set_id: UUID) {
+    init(id: UUID? = nil, title: String, distance: Int, rest: Int) {
         self.id = id
         self.title = title
         self.distance = distance
         self.rest = rest
-        self.$set.id = set_id
+        // self.$set.id = set_id
     }
     
     func toDTO() -> StrokeDTO {
@@ -41,8 +42,8 @@ final class Stroke: Model, @unchecked Sendable {
             id: self.id,
             title: self.$title.value,
             distance: self.$distance.value,
-            rest: self.$rest.value,
-            set_id: self.$set.id
+            rest: self.$rest.value
+            // set_id: self.$set.id
         )
     }
 }

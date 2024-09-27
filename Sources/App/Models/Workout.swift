@@ -17,25 +17,25 @@ final class Workout: Model, @unchecked Sendable {
     @Field(key: "distance")
     var distance: Int
 
-    @Children(for: \.$workout)
-    var sets: [Set]
+    // @Children(for: \.$workout)
+    // var sets: [Set]
 
 
     init() { }
 
-    init(id: UUID? = nil, title: String, distance: Int = 0, sets: [Set] = []) {
+    // init(id: UUID? = nil, title: String, distance: Int = 0, sets: [Set] = []) {
+    init(id: UUID? = nil, title: String, distance: Int) {
         self.id = id
         self.title = title
-        self.distance = 0
-        self.sets = []
+        self.distance = distance
+        // self.sets = []
     }
     
     func toDTO() -> WorkoutDTO {
         .init(
             id: self.id,
             title: self.$title.value,
-            distance: self.$distance.values,
-            sets: 
+            distance: self.$distance.value
         )
     }
 }

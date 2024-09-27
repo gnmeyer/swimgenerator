@@ -1,28 +1,32 @@
 //
-//  WorkoutDTO.swift
+//  SetDTO.swift
 //  Workout
 //
-//  Created by Grant Meyer on 9/25/24.
+//  Created by Grant Meyer on 9/26/24.
 //
 
 import Fluent
 import Vapor
 
-struct WorkoutDTO: Content {
+struct SetDTO: Content {
     var id: UUID?
     var title: String?
     var distance: Int?
+    var rest: Int?
+    var reps: Int?
     
-    func toModel() -> Workout {
-        let model = Workout()
+    func toModel() -> Stroke {
+        let model = Stroke()
         
         model.id = self.id
         if let title = self.title {
             model.title = title
         }
-        
         if let distance = self.distance {
             model.distance = distance
+        }
+        if let rest = self.rest {
+            model.rest = rest
         }
         return model
     }
