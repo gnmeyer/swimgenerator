@@ -1,8 +1,8 @@
 import Fluent
 import struct Foundation.UUID
 
-final class Set: Model, @unchecked Sendable {
-    static let schema = "sets"
+final class SwimSet: Model, @unchecked Sendable {
+    static let schema = "swimsets"
     
     @ID(key: .id)
     var id: UUID?
@@ -42,7 +42,7 @@ final class Set: Model, @unchecked Sendable {
         // self.workout_id = workout_id
     }
     
-    func toDTO() -> SetDTO {
+    func toDTO() -> SwimSetDTO {
         .init(
             id: self.id,
             title: self.$title.value,

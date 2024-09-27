@@ -8,15 +8,15 @@
 import Fluent
 import Vapor
 
-struct SetDTO: Content {
+struct SwimSetDTO: Content {
     var id: UUID?
     var title: String?
     var distance: Int?
     var rest: Int?
     var reps: Int?
     
-    func toModel() -> Stroke {
-        let model = Stroke()
+    func toModel() -> SwimSet {
+        let model = SwimSet()
         
         model.id = self.id
         if let title = self.title {

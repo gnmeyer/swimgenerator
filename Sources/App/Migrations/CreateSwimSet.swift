@@ -1,8 +1,8 @@
 import Fluent
 
-struct CreateSet: AsyncMigration {
+struct CreateSwimSet: AsyncMigration {
     func prepare(on database: Database) async throws {
-        try await database.schema("sets")
+        try await database.schema("swimsets")
             .id()
             .field("title", .string, .required)
             .field("distance", .int, .required)
@@ -12,6 +12,6 @@ struct CreateSet: AsyncMigration {
     }
 
     func revert(on database: Database) async throws {
-        try await database.schema("strokes").delete()
+        try await database.schema("swimsets").delete()
     }
 }
