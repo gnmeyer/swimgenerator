@@ -8,7 +8,7 @@ struct WorkoutController: RouteCollection {
         workouts.get(use: self.index)
         workouts.post(use: self.create)
         workouts.group(":workoutID") { workout in
-            workout.delete(use: self.delete)
+        workout.delete(use: self.delete)
         }
     }
 

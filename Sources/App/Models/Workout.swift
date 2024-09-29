@@ -32,10 +32,10 @@ final class Workout: Model, @unchecked Sendable {
     }
     
     func toDTO() -> WorkoutDTO {
-        .init(
+        .init( 
             id: self.id,
-            title: self.$title.value,
-            distance: self.$distance.value
+            title: self.$title.value ?? "Unknown",
+            distance: self.$distance.value ?? 0
         )
     }
 }

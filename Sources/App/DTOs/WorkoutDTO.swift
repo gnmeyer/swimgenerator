@@ -10,20 +10,20 @@ import Vapor
 
 struct WorkoutDTO: Content {
     var id: UUID?
-    var title: String?
-    var distance: Int?
+    var title: String
+    var distance: Int
     
     func toModel() -> Workout {
         let model = Workout()
         
         model.id = self.id
-        if let title = self.title {
+        // if let title = self.title {
             model.title = title
-        }
+        // }
         
-        if let distance = self.distance {
+        // if let distance = self.distance {
             model.distance = distance
-        }
+        // }
         return model
     }
 }
