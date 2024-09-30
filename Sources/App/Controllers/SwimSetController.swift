@@ -27,7 +27,7 @@ struct SwimSetController: RouteCollection {
 
     @Sendable
     func delete(req: Request) async throws -> HTTPStatus {
-        guard let swimset = try await Workout.find(req.parameters.get("swimsetID"), on: req.db) else {
+        guard let swimset = try await SwimSet.find(req.parameters.get("swimsetID"), on: req.db) else {
             throw Abort(.notFound)
         }
 
