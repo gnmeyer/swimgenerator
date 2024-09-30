@@ -6,7 +6,7 @@ struct CreateWorkout: AsyncMigration {
             .id()
             .field("title", .string, .required)
             .field("distance", .int, .required)
-            // .field("sets", .array(of: .json), .required)
+            .field("swimset_ids", .array(of: .uuid), .required)
             .create()
     }
 

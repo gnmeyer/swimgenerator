@@ -17,25 +17,27 @@ final class Workout: Model, @unchecked Sendable {
     @Field(key: "distance")
     var distance: Int
 
-    // @Children(for: \.$workout)
-    // var sets: [Set]
+    @Siblings(through: WorkoutSwimSetPivot.self, from: \.$workout, to: \.$swimset)
+    var swimsets: [SwimSet]
 
+    @Field(key: "swimset_ids")
+    var swimset_ids: [UUID]?
 
     init() { }
 
-    // init(id: UUID? = nil, title: String, distance: Int = 0, sets: [Set] = []) {
-    init(id: UUID? = nil, title: String, distance: Int) {
+    init(id: UUID? = nil, title: String, distance: Int, swimset_ids: [UUID]? = nil) {
         self.id = id
         self.title = title
         self.distance = distance
-        // self.sets = []
+        self.swimset_ids = swimset_ids
     }
     
     func toDTO() -> WorkoutDTO {
-        .init(
+        .init( 
             id: self.id,
             title: self.$title.value,
-            distance: self.$distance.value
+            distance: self.$distance.value,
+            swimset_ids: self.swimset_ids
         )
     }
 }

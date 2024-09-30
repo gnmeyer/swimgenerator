@@ -28,6 +28,9 @@ struct SwimSetDTO: Content {
         if let rest = self.rest {
             model.rest = rest
         }
+        if let reps = self.reps {
+            model.reps = reps
+        }
         return model
     }
 }
