@@ -14,7 +14,8 @@ struct SwimSetDTO: Content {
     var distance: Int?
     var rest: Int?
     var reps: Int?
-    
+    var stroke_ids: [UUID]?
+
     func toModel() -> SwimSet {
         let model = SwimSet()
         
@@ -30,6 +31,10 @@ struct SwimSetDTO: Content {
         }
         if let reps = self.reps {
             model.reps = reps
+        }
+
+        if let stroke_ids = self.stroke_ids {
+            model.stroke_ids = stroke_ids
         }
         return model
     }

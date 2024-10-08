@@ -8,6 +8,7 @@ struct CreateSwimSet: AsyncMigration {
             .field("distance", .int, .required)
             .field("rest", .int, .required)
             .field("reps", .int, .required)
+            .field("stroke_ids", .array(of: .uuid), .required)
             .create()
     }
 
