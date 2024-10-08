@@ -12,8 +12,6 @@ struct CreateStroke: AsyncMigration {
         try await database.schema("strokes")
             .id()
             .field("title", .string, .required)
-            .field("distance", .int, .required)
-            .field("rest", .int, .required)
             .create()
     }
 
