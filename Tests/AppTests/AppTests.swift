@@ -9,6 +9,7 @@ final class AppTests: XCTestCase {
         self.app = try await Application.make(.testing)
         try await configure(app)
         try await app.autoMigrate()
+        
     }
     
     override func tearDown() async throws { 
@@ -17,13 +18,19 @@ final class AppTests: XCTestCase {
         self.app = nil
     }
     
-    func testHelloWorld() async throws {
+/*    func testHelloWorld() async throws {
         try await self.app.test(.GET, "hello", afterResponse: { res async in
             XCTAssertEqual(res.status, .ok)
             XCTAssertEqual(res.body.string, "Hello, world!")
         })
+    }*/
+    
+    func testPostSwimStroke() async throws {
+        try await self.app.test(.GET, "strokes", afterResponse: { res async in
+            XCTAssertEqual(res.status, .ok)
+            XCTAssertEqual(res.body.string, "Hello, world!")
+        })
     }
-  
 }
 
 

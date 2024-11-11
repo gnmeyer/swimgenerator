@@ -20,7 +20,7 @@ final class Stroke: Model, @unchecked Sendable {
     init() { }
 
     // init(id: UUID? = nil, title: String, distance: Int, rest: Int, set_id: UUID) {
-    init(id: UUID? = nil, title: String, distance: Int, rest: Int) {
+    init(id: UUID? = nil, title: String) {
         self.id = id
         self.title = title
     }
