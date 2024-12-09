@@ -17,6 +17,8 @@ let package = Package(
         .package(url: "https://github.com/vapor/leaf.git", from: "4.3.0"),
         // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
+
+        .package(url: "https://github.com/open-telemetry/opentelemetry-swift", from: "1.0.0"),
     ],
     targets: [
         .executableTarget(
@@ -28,6 +30,10 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
+                                .product(name: "OpenTelemetryApi", package: "opentelemetry-swift"),
+                .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift"),
+                .product(name: "StdoutExporter", package: "opentelemetry-swift"),
+                .product(name: "ResourceExtension", package: "opentelemetry-swift"),
             ],
             swiftSettings: swiftSettings
         ),

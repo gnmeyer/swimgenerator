@@ -1,7 +1,12 @@
 import Fluent
 import Vapor
+import OpenTelemetryApi
+import OpenTelemetrySdk
+import StdoutExporter
+import ResourceExtension
 
 struct StrokeController: RouteCollection {
+
     func boot(routes: RoutesBuilder) throws {
         let strokes = routes.grouped("strokes")
 
@@ -19,7 +24,30 @@ struct StrokeController: RouteCollection {
 
     @Sendable
     func create(req: Request) async throws -> StrokeDTO {
+
+        //Set up Open Telemetry
+        let spanExporter = StdoutExporter();
+        let spanProcessor = SimpleSpanProcessor(spanExporter: spanExporter)
+        let resources = DefaultResources().get()
+
+        let instrumentationScopeName = "SwimGen Vapor Server"
+        let instrumentationScopeVersion = "semver:0.1.0"
+
+        OpenTelemetry.registerTracerProvider(tracerProvider:
+            TracerProviderBuilder()
+                .add(spanProcessor: spanProcessor)
+                .with(resource: resources)
+                .build()
+        )
+    
+
+        let tracer = OpenTelemetry.instance.tracerProvider.get(instrumentationName: "Test Instrument", instrumentationVersion: "1.0")
+
+        let span = tracer.spanBuilder(spanName: "Create Span Test").setSpanKind(spanKind: .internal).startSpan()
+
         let stroke = try req.content.decode(StrokeDTO.self).toModel()
+        
+        span.end();
 
         try await stroke.save(on: req.db)
         return stroke.toDTO()
