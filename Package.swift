@@ -34,6 +34,8 @@ let package = Package(
                 .product(name: "OpenTelemetrySdk", package: "opentelemetry-swift"),
                 .product(name: "StdoutExporter", package: "opentelemetry-swift"),
                 .product(name: "ResourceExtension", package: "opentelemetry-swift"),
+                .product(name: "OpenTelemetryProtocolExporterHTTP", package: "opentelemetry-swift"),
+                .product(name: "JaegerExporter", package: "opentelemetry-swift"),
             ],
             swiftSettings: swiftSettings
         ),

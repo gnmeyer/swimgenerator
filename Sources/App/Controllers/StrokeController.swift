@@ -24,42 +24,31 @@ struct StrokeController: RouteCollection {
 
     @Sendable
     func create(req: Request) async throws -> StrokeDTO {
+        let tracer = await TraceManager.shared.tracer
 
         //Set up Open Telemetry
-        let spanExporter = StdoutExporter();
-        let spanProcessor = SimpleSpanProcessor(spanExporter: spanExporter)
-        let resources = DefaultResources().get()
+        let createStrokeSpan = tracer.spanBuilder(spanName: "/createSwimStroke").setSpanKind(spanKind: .client).startSpan()
 
-        let instrumentationScopeName = "SwimGen Vapor Server"
-        let instrumentationScopeVersion = "semver:0.1.0"
-
-        OpenTelemetry.registerTracerProvider(tracerProvider:
-            TracerProviderBuilder()
-                .add(spanProcessor: spanProcessor)
-                .with(resource: resources)
-                .build()
-        )
-    
-
-        let tracer = OpenTelemetry.instance.tracerProvider.get(instrumentationName: "Test Instrument", instrumentationVersion: "1.0")
-
-        let span = tracer.spanBuilder(spanName: "Create Span Test").setSpanKind(spanKind: .internal).startSpan()
-
-        let stroke = try req.content.decode(StrokeDTO.self).toModel()
-        
-        span.end();
+        let stroke = try req.content.decode(StrokeDTO.self).toModel(createStrokeSpan: createStrokeSpan)
 
         try await stroke.save(on: req.db)
+        createStrokeSpan.end()
         return stroke.toDTO()
     }
 
     @Sendable
     func delete(req: Request) async throws -> HTTPStatus {
+        let tracer = await TraceManager.shared.tracer
+
+        let deleteStrokeSpan = tracer.spanBuilder(spanName: "/deleteSwimStroke").setSpanKind(spanKind: .client).startSpan()
+
         guard let stroke = try await Stroke.find(req.parameters.get("strokeID"), on: req.db) else {
             throw Abort(.notFound)
         }
 
         try await stroke.delete(on: req.db)
+
+        deleteStrokeSpan.end()
         return .noContent
     }
 }
