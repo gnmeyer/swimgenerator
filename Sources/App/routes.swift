@@ -2,6 +2,7 @@ import Fluent
 import Vapor
 
 func routes(_ app: Application) throws {
+
     
     app.get { req async throws in
         try await req.view.render("index", ["title": "Hello Vapor!"])
@@ -15,6 +16,7 @@ func routes(_ app: Application) throws {
     try app.register(collection: WorkoutController())
     try app.register(collection: SwimSetController())
     try app.register(collection: StrokeController())
+
 
 
 //    app.post("workouts") {req -> EventLoopFuture<Workout> in

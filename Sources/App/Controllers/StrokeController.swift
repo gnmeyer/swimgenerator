@@ -49,6 +49,7 @@ struct StrokeController: RouteCollection {
         try await stroke.delete(on: req.db)
 
         deleteStrokeSpan.end()
+
         return .noContent
     }
 }
